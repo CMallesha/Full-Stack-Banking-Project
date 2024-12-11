@@ -1,0 +1,258 @@
+<%@page import="com.bank.dto.Customer"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;   
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 100vh;
+            width: 240px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #1e2957;
+            color: white;
+            padding: 20px;
+        }
+
+        .sidebar .nav-link {
+            color: #ccc;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #2d3e89;
+            color: white;
+        }
+
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+
+        /* Navbar */
+        .navbar {
+            margin-left: 240px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .navbar .navbar-brand {
+            color: #1e2957;
+            font-weight: bold;
+        }
+
+        .navbar .nav-item .nav-link {
+            margin-right: 10px;
+            color: #666;
+        }
+
+        .navbar .nav-item .btn {
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .btn-profile {
+            background-color: #1e2957;
+            color: white;
+            border: none;
+        }
+
+        .btn-profile:hover {
+            background-color: #2d3e89;
+        }
+
+        .btn-logout {
+            background-color: #f44336;
+            color: white;
+            border: none;
+        }
+
+        .btn-logout:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Main Section */
+        .main-content {
+            margin-left: 240px;
+            padding: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #f8aa27;
+            color: white;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .card-body h5 {
+            font-size: 20px;
+        }
+
+        /* Footer */
+       footer {
+           margin-top: auto;
+           padding: 20px;
+           background-color: #ffffff;
+           border-top: 1px solid #ddd;
+           text-align: center;
+           font-size: 14px;
+           color: #666;
+      }
+      .fail{
+            text-align: center;
+            color: red;
+            font-weight: bold;
+      }
+    </style>
+</head>
+
+<body>
+
+    <%Customer c=(Customer)session.getAttribute("customer"); %>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h4 class="text-white mb-4">Bank Dashboard</h4>
+        <nav class="nav flex-column">
+            <a class="nav-link" href="#"><i class="bi bi-speedometer2"></i> Dashboard</a>
+            <a class="nav-link" href="Deposit.jsp"><i class="bi bi-wallet2"></i> Deposit Money</a>
+            <a class="nav-link" href="#"><i class="bi bi-graph-up"></i> Withdraw Money</a>
+            <a class="nav-link" href="#"><i class="bi bi-arrow-left-right"></i> Transactions</a>
+            <a class="nav-link" href="#"><i class="bi bi-graph-up"></i> Transfer Amount</a>
+            <a class="nav-link" href="#"><i class="bi bi-credit-card"></i> Update Account</a>
+            <a class="nav-link" href="#"><i class="bi bi-gear"></i> Reset Your PIN</a>
+        </nav>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Bank Application</a>
+            
+            <%String Failure=(String)request.getAttribute("failure");%>
+            <%if(Failure!=null) {%>
+            <h3 class="fail"><%=Failure %></h3>
+            <%} %>
+            
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="Profile.jsp"><button class="btn btn-profile">Profile</button></a>
+                </li>
+                <li class="nav-item">
+                <form action="logout" method="get">
+                    <button class="btn btn-logout" name="logout" value="logout" type="submit">Logout</button>
+                </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <h3 class="mb-4">Welcome, <%=c.getName()%></h3>
+
+            <!-- Dashboard Cards -->
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">Account Balance</div>
+                        <div class="card-body">
+                            <h5>$12,345.67</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">Last Transaction</div>
+                        <div class="card-body">
+                            <h5>$1,200.00</h5>
+                            <p>To: John Doe</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">Type of Account</div>
+                        <div class="card-body">
+                            <h5>Savings Account</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction Table -->
+            <div class="mt-4">
+                <h4>Recent Transactions</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-12-09</td>
+                            <td>ATM Withdrawal</td>
+                            <td>-$500.00</td>
+                            <td>Completed</td>
+                        </tr>
+                        <tr>
+                            <td>2024-12-08</td>
+                            <td>Salary Credit</td>
+                            <td>+$3,000.00</td>
+                            <td>Completed</td>
+                        </tr>
+                        <tr>
+                            <td>2024-12-07</td>
+                            <td>Utility Bill</td>
+                            <td>-$100.00</td>
+                            <td>Pending</td>
+                        </tr>
+                    </tbody>
+                </table>+
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        © 2024 BankName. All rights reserved.
+    </footer>
+
+    <!-- Bootstrap Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+</body>
+
+</html>
+    
