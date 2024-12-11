@@ -1,3 +1,7 @@
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.bank.dao.TransactionDAO"%>
+<%@page import="com.bank.dao.TransactionDAOImpl"%>
 <%@page import="com.bank.dto.Transaction"%>
 <%@page import="com.bank.dto.Customer"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -27,6 +31,10 @@
 
 <%Customer c=(Customer)session.getAttribute("customer"); %>
 <%Transaction t=(Transaction)session.getAttribute("transaction"); %>
+
+<%TransactionDAO tdao=new TransactionDAOImpl();  
+ArrayList<Transaction> transList=(ArrayList<Transaction>)tdao.getTransaction();
+Iterator<Transaction> it=transList.iterator(); %>
 
     <div class="container mt-5">
         <!-- Profile Header -->
@@ -70,53 +78,22 @@
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        <%if(t!=null){ %>
+                        
                         <tbody>
+                        
+                        <%while(it.hasNext()){
+                          Transaction T=it.next();
+                        %>
                             <tr>
-                                <td><%=t.getDate() %></td>
-                                <td><%=t.getTransactionId() %></td>
-                                <td><%=t.getUser() %></td>
-                                <td><%=t.getRec_acc() %></td>
-                                <td><%=t.getAmount() %></td>
-                                <td><span class="badge bg-success"><%=t.getTransaction() %></span></td>
+                                <td><%=T.getDate() %></td>
+                                <td><%=T.getTransactionId() %></td>
+                                <td><%=T.getUser() %></td>
+                                <td><%=T.getRec_acc() %></td>
+                                <td><%=T.getAmount() %></td>
+                                <td><span class="badge bg-success"><%=T.getTransaction() %></span></td>
                             </tr>
-                            <tr>
-                                <td><%=t.getDate() %></td>
-                                <td><%=t.getTransactionId() %></td>
-                                <td><%=t.getUser() %></td>
-                                <td><%=t.getRec_acc() %></td>
-                                <td><%=t.getAmount() %></td>
-                                <td><span class="badge bg-success"><%=t.getTransaction() %></span></td>
-                            </tr>
-                            <tr>
-                                <td><%=t.getDate() %></td>
-                                <td><%=t.getTransactionId() %></td>
-                                <td><%=t.getUser() %></td>
-                                <td><%=t.getRec_acc() %></td>
-                                <td><%=t.getAmount() %></td>
-                                <td><span class="badge bg-success"><%=t.getTransaction() %></span></td>
-                            </tr>
-                            <tr>
-                                <td><%=t.getDate() %></td>
-                                <td><%=t.getTransactionId() %></td>
-                                <td><%=t.getUser() %></td>
-                                <td><%=t.getRec_acc() %></td>
-                                <td><%=t.getAmount() %></td>
-                                <td><span class="badge bg-success"><%=t.getTransaction() %></span></td>
-                            </tr>
+                          <%} %>
                         </tbody>
-                        <%} else{%>
-                        <tbody>
-                            <tr>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-                         </tbody>
-                         <%} %>
                     </table>
                 </div>
             </div>
