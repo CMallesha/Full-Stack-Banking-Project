@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.bank.dao.CustomerDAO;
 import com.bank.dao.CustomerDAOImpl;
 import com.bank.dto.Customer;
+import com.bank.dto.Transaction;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -35,6 +36,14 @@ public class Login extends HttpServlet {
 		CustomerDAO cdao=new CustomerDAOImpl();
 		Customer c=cdao.getCustomer(AccNumber, Pin);
 		
+		
+		//TRANSACTION ATTRIBUTE SETTING 
+		Transaction ts = new Transaction();
+		ts.setUser(c.getAccNum());
+		session.setAttribute("tran", ts);
+
+		
+		
 		  if(c!=null) 
 		  { 			  
 			  session.setAttribute("customer", c);
@@ -42,7 +51,7 @@ public class Login extends HttpServlet {
 			  rd.forward(req, resp);
 		  } 
 		  else 
-		  { 			  
+		  {		  
 			  req.setAttribute("failure", "Failed to Login");
 			  RequestDispatcher rd=req.getRequestDispatcher("Login.jsp");
 			  rd.forward(req, resp);

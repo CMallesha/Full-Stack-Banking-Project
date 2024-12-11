@@ -1,3 +1,8 @@
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.bank.dto.Transaction"%>
+<%@page import="com.bank.dao.TransactionDAO"%>
+<%@page import="com.bank.dao.TransactionDAOImpl"%>
 <%@page import="com.bank.dto.Customer"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -130,12 +135,29 @@
             color: red;
             font-weight: bold;
       }
+      .recenttrans {
+            color: white;
+            font-weight: bold;
+            background-color: #28a745; /* Green background */
+            padding: 10px 20px; /* Adds space around the text */
+            border-radius: 8px; /* Rounded corners */
+            text-align: center; /* Centers the text */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+            font-size: 1.5rem; /* Increases the font size */
+            letter-spacing: 1px; /* Adds spacing between letters */
+       }
     </style>
 </head>
 
 <body>
 
     <%Customer c=(Customer)session.getAttribute("customer"); %>
+    <%Transaction t=(Transaction)session.getAttribute("transaction"); %>
+    
+   <%TransactionDAO tdao=new TransactionDAOImpl();  
+     ArrayList<Transaction> transList=(ArrayList<Transaction>)tdao.getTransaction();
+     Iterator<Transaction> it=transList.iterator(); %>
+      
     <!-- Sidebar -->
     <div class="sidebar">
         <h4 class="text-white mb-4">Bank Dashboard</h4>
@@ -182,18 +204,17 @@
             <div class="row g-3">
                 <div class="col-md-4">
                     <div class="card">
-                        <div class="card-header">Account Balance</div>
+                        <div class="card-header">Account Number</div>
                         <div class="card-body">
-                            <h5>$12,345.67</h5>
+                            <h5><%=c.getAccNum() %></h5>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card">
-                        <div class="card-header">Last Transaction</div>
+                        <div class="card-header">Account Net Balance</div>
                         <div class="card-body">
-                            <h5>$1,200.00</h5>
-                            <p>To: John Doe</p>
+                            <h5><%=c.getBal() %></h5>
                         </div>
                     </div>
                 </div>
@@ -209,35 +230,34 @@
 
             <!-- Transaction Table -->
             <div class="mt-4">
-                <h4>Recent Transactions</h4>
+                <h4 class="recenttrans">Last Five Recent Transactions</h4>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Date</th>
-                            <th>Description</th>
-                            <th>Amount</th>
-                            <th>Status</th>
+                                <th>Date</th>
+                                <th>Transaction ID</th>
+                                <th>UserAccount</th>
+                                <th>RecverAccount</th>
+                                <th>Amount</th>
+                                <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>2024-12-09</td>
-                            <td>ATM Withdrawal</td>
-                            <td>-$500.00</td>
-                            <td>Completed</td>
-                        </tr>
-                        <tr>
-                            <td>2024-12-08</td>
-                            <td>Salary Credit</td>
-                            <td>+$3,000.00</td>
-                            <td>Completed</td>
-                        </tr>
-                        <tr>
-                            <td>2024-12-07</td>
-                            <td>Utility Bill</td>
-                            <td>-$100.00</td>
-                            <td>Pending</td>
-                        </tr>
+                    <% int i=1;
+                    while(it.hasNext() && i<=5){
+                          Transaction T=it.next();
+                    %>
+                            <tr>
+                                <td><%=T.getDate() %></td>
+                                <td><%=T.getTransactionId() %></td>
+                                <td><%=T.getUser() %></td>
+                                <td><%=T.getRec_acc() %></td>
+                                <td><%=T.getAmount() %></td>
+                                <td><span class="badge bg-success"><%=T.getTransaction() %></span></td>
+                            </tr>
+                     <% i++;
+                        } 
+                     %>       
                     </tbody>
                 </table>+
                 

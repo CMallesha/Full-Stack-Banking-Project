@@ -30,17 +30,17 @@
 <body>
 
 <%Customer c=(Customer)session.getAttribute("customer"); %>
-<%Transaction t=(Transaction)session.getAttribute("transaction"); %>
+<%Transaction t=(Transaction)session.getAttribute("tran"); %>
 
 <%TransactionDAO tdao=new TransactionDAOImpl();  
-ArrayList<Transaction> transList=(ArrayList<Transaction>)tdao.getTransaction();
-Iterator<Transaction> it=transList.iterator(); %>
+  ArrayList<Transaction> transactionList=(ArrayList<Transaction>)tdao.getTransaction(t.getUser());
+  Iterator<Transaction> it=transactionList.iterator(); %>
 
     <div class="container mt-5">
         <!-- Profile Header -->
         <div class="profile-header">
             <h1>Customer Profile</h1>
-            <p>Welcome to your profile page</p>
+            <p>Hai <%=c.getName()%> Welcome to your profile page</p>
         </div>
 
         <!-- Customer Information -->
