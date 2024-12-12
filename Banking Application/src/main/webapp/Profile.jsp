@@ -40,7 +40,7 @@
         <!-- Profile Header -->
         <div class="profile-header">
             <h1>Customer Profile</h1>
-            <p>Hai <%=c.getName()%> Welcome to your profile page</p>
+            <p>Hey! <%=c.getName()%> Welcome to your profile page</p>
         </div>
 
         <!-- Customer Information -->

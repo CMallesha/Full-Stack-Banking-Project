@@ -164,7 +164,7 @@
         <nav class="nav flex-column">
             <a class="nav-link" href="#"><i class="bi bi-speedometer2"></i> Dashboard</a>
             <a class="nav-link" href="Deposit.jsp"><i class="bi bi-wallet2"></i> Deposit Money</a>
-            <a class="nav-link" href="#"><i class="bi bi-graph-up"></i> Withdraw Money</a>
+            <a class="nav-link" href="Withdraw.jsp"><i class="bi bi-graph-up"></i> Withdraw Money</a>
             <a class="nav-link" href="#"><i class="bi bi-arrow-left-right"></i> Transactions</a>
             <a class="nav-link" href="#"><i class="bi bi-graph-up"></i> Transfer Amount</a>
             <a class="nav-link" href="#"><i class="bi bi-credit-card"></i> Update Account</a>
@@ -259,8 +259,8 @@
                         } 
                      %>       
                     </tbody>
-                </table>+
-                
+                </table>
+                <a href="Profile.jsp"><button class="btn btn-profile">View All</button></a>
             </div>
         </div>
     </div>
