@@ -79,7 +79,7 @@ public class Withdraw extends HttpServlet {
 
             }
         }else {
-            req.setAttribute("withdrawfailAccountNum", "Amount " + Amount + " has been failed to withdraw due to account number mismath! try again");
+            req.setAttribute("withdrawfailAccountNum", "Amount " + Amount + " has been failed to withdraw due to account number mismath! OR Insufficient Balace try again");
             RequestDispatcher rd = req.getRequestDispatcher("Withdraw.jsp");
             rd.forward(req, resp);
         }
