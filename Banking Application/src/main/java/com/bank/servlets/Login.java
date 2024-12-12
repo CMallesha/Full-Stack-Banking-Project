@@ -36,6 +36,9 @@ public class Login extends HttpServlet {
 		CustomerDAO cdao=new CustomerDAOImpl();
 		Customer c=cdao.getCustomer(AccNumber, Pin);
 		
+		session.setAttribute("customer", c);
+	
+		
 		
 		//TRANSACTION ATTRIBUTE SETTING 
 		Transaction ts = new Transaction();

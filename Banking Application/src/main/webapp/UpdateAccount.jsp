@@ -1,3 +1,4 @@
+<%@page import="com.bank.dto.Customer"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -100,9 +101,25 @@
         .back-to-dashboard a:hover {
             text-decoration: underline;
         }
+        
+        .sucs,
+        .fail {
+                text-align: center;
+                font-weight: bold;
+                font-size: 16px;
+            }
+
+            .sucs {
+                color: green;
+            }
+
+            .fail {
+                color: red;
+            }
     </style>
 </head>
 <body>
+         <%Customer c=(Customer)session.getAttribute("customer"); %>  <!-- Accessing customer info here -->
 
 <div class="container">
     <div class="icon">
@@ -111,17 +128,35 @@
     <div class="form-header">
         <h2>Update Profile</h2>
     </div>
-    <form action="/updateProfile" method="post">
+      
+      
+            <%String Success=(String)request.getAttribute("updatesuccuess");%>
+            <%if(Success!=null){%>
+            <h3 class="sucs"><%=Success%></h3>
+            <%} %>
+
+            <%String Failure=(String)request.getAttribute("updatefailed");%>
+            <%if(Failure!=null){%>
+            <h3 class="fail"><%=Failure%></h3>
+            <%} %>
+
+            <%String Fail=(String)request.getAttribute("updatefail");%>
+            <%if(Fail!=null){%>
+            <h3 class="fail"><%=Fail%></h3>
+            <%} %>
+      
+      
+    <form action="updateProfile" method="post">
         <!-- Account Number -->
         <div class="mb-3">
             <label for="accountNumber" class="form-label">Account Number</label>
-            <input type="text" class="form-control" id="accountNumber" name="accountNumber" placeholder="Enter your account number" required>
+            <input type="text" class="form-control" id="accountNumber" name="accountNumber" value="<%=c.getAccNum() %>" required>
         </div>
 
         <!-- Full Name -->
         <div class="mb-3">
             <label for="fullName" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name" required>
+            <input type="text" class="form-control" id="fullName" name="fullName" value="<%=c.getName() %>" required>
         </div>
 
         <!-- Email -->
@@ -133,7 +168,7 @@
         <!-- Phone Number -->
         <div class="mb-3">
             <label for="phone" class="form-label">Phone Number</label>
-            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
+            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your number" required>
         </div>
 
         <!-- Update Button -->
@@ -143,11 +178,11 @@
         </div>
     </form>
     <div class="back-to-dashboard">
-        <a href="/dashboard">Back to Dashboard</a>
+        <a href="Dashboard.jsp">Back to Dashboard</a>
     </div>
 </div>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+</html> 
