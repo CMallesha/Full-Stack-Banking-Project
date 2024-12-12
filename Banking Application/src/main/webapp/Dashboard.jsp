@@ -167,8 +167,8 @@
             <a class="nav-link" href="Withdraw.jsp"><i class="bi bi-graph-up"></i> Withdraw Money</a>
             <a class="nav-link" href="Transactions.jsp"><i class="bi bi-arrow-left-right"></i> Account Statements</a>
             <a class="nav-link" href="TransferAmt.jsp"><i class="bi bi-graph-up"></i> Transfer Amount</a>
-            <a class="nav-link" href="#"><i class="bi bi-credit-card"></i> Update Account</a>
-            <a class="nav-link" href="#"><i class="bi bi-gear"></i> Reset Your PIN</a>
+            <a class="nav-link" href="UpdateAccount.jsp"><i class="bi bi-credit-card"></i> Update Account</a>
+            <a class="nav-link" href="ResetPin.jsp"><i class="bi bi-gear"></i> Reset Your PIN</a>
         </nav>
     </div>
 
