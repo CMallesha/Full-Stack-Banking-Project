@@ -46,10 +46,10 @@
 </head>
 <body>
 
-<%Transaction t=(Transaction)session.getAttribute("tran"); %>
+<%Transaction ct=(Transaction)session.getAttribute("tran"); %>
 
 <%TransactionDAO tdao=new TransactionDAOImpl();  
-  ArrayList<Transaction> transactionList=(ArrayList<Transaction>)tdao.getTransaction(t.getUser());
+  ArrayList<Transaction> transactionList=(ArrayList<Transaction>)tdao.getTransaction(ct.getUser());
   Iterator<Transaction> it=transactionList.iterator(); %>
   
   

@@ -72,10 +72,10 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Transaction ID</th>
-                                <th>UserAccount</th>
                                 <th>RecverAccount</th>
                                 <th>Amount</th>
                                 <th>Status</th>
+                                <th>Balance (₹)</th> 
                             </tr>
                         </thead>
                         
@@ -87,10 +87,10 @@
                             <tr>
                                 <td><%=T.getDate() %></td>
                                 <td><%=T.getTransactionId() %></td>
-                                <td><%=T.getUser() %></td>
                                 <td><%=T.getRec_acc() %></td>
                                 <td><%=T.getAmount() %></td>
                                 <td><span class="badge bg-success"><%=T.getTransaction() %></span></td>
+                                <td><%=T.getBalance() %></td>
                             </tr>
                           <%} %>
                         </tbody>

@@ -56,28 +56,35 @@
 
         /* Navbar */
         .navbar {
-            margin-left: 240px;
-            background-color: #ffffff;
-            border-bottom: 1px solid #ddd;
+           margin-left: 240px;
+           background-color: #ffffff;
+           border-bottom: 1px solid #ddd;
         }
 
+       /* Navbar Brand */
         .navbar .navbar-brand {
-            color: #1e2957;
-            font-weight: bold;
+           color: #1e2957;
+           font-weight: bold;
         }
 
-        .navbar .nav-item .nav-link {
+         /* Navbar Links */
+         .navbar .nav-item {
+            margin-right: 20px; /* Adds spacing between navbar items */
+        }
+
+         .navbar .nav-item .nav-link {
             margin-right: 10px;
             color: #666;
-        }
+         }
 
-        .navbar .nav-item .btn {
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
+          /* Navbar Buttons */
+          .navbar .nav-item .btn {
+              padding: 6px 15px;
+              border-radius: 20px;
+              font-size: 14px;
+         }
 
-        .btn-profile {
+       .btn-profile {
             background-color: #1e2957;
             color: white;
             border: none;
@@ -152,13 +159,144 @@
 <body>
 
     <%Customer c=(Customer)session.getAttribute("customer"); %>
-    <%Transaction t=(Transaction)session.getAttribute("transaction"); %>
+    <%Transaction t=(Transaction)session.getAttribute("tran"); %>
     
    <%TransactionDAO tdao=new TransactionDAOImpl();  
-     ArrayList<Transaction> transList=(ArrayList<Transaction>)tdao.getTransaction();
+     ArrayList<Transaction> transList=(ArrayList<Transaction>)tdao.getTransaction(t.getUser());
      Iterator<Transaction> it=transList.iterator(); %>
-      
+     
+   <%if(c.getAccNum()==1100110011){ %> 
     <!-- Sidebar -->
+    <div class="sidebar">
+        <h4 class="text-white mb-4">Bank Dashboard</h4>
+        <nav class="nav flex-column">
+            <a class="nav-link" href="#"><i class="bi bi-speedometer2"></i> Admin Dashboard</a>
+            <a class="nav-link" href="Deposit.jsp"><i class="bi bi-wallet2"></i> Deposit Money</a>
+            <a class="nav-link" href="Withdraw.jsp"><i class="bi bi-graph-up"></i> Withdraw Money</a>
+            <a class="nav-link" href="Transactions.jsp"><i class="bi bi-arrow-left-right"></i> Account Statements</a>
+            <a class="nav-link" href="TransferAmt.jsp"><i class="bi bi-graph-up"></i> Transfer Amount</a>
+            <a class="nav-link" href="UpdateAccount.jsp"><i class="bi bi-credit-card"></i> Update Account</a>
+            <a class="nav-link" href="ResetPin.jsp"><i class="bi bi-gear"></i> Reset Your PIN</a>
+        </nav>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Bank Application</a>
+            
+            <%String Failure=(String)request.getAttribute("failure");%>
+            <%if(Failure!=null) {%>
+            <h3 class="fail"><%=Failure %></h3>
+            <%} %>
+            
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="Profile.jsp"><button class="btn btn-profile">Profile</button></a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="ViewUsers.jsp"><button class="btn btn-profile">View Users</button></a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="ViewAllTransactions.jsp"><button class="btn btn-profile">View Transactions</button></a>
+                </li>
+                
+                <li class="nav-item">
+                <form action="logout" method="get">
+                    <button class="btn btn-logout" name="logout" value="logout" type="submit">Logout</button>
+                </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <h3 class="mb-4">Welcome Admin, <%=c.getName()%></h3>
+
+            <!-- Dashboard Cards -->
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">Account Number</div>
+                        <div class="card-body">
+                            <h5><%=c.getAccNum() %></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">Account Net Balance</div>
+                        <div class="card-body">
+                            <h5><%=c.getBal() %></h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">Type of Account</div>
+                        <div class="card-body">
+                            <h5>Savings Account</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction Table -->
+            
+     <%TransactionDAO atdao=new TransactionDAOImpl();  
+     ArrayList<Transaction> atransList=(ArrayList<Transaction>)tdao.getTransaction();
+     Iterator<Transaction> ait=atransList.iterator(); %>
+            <div class="mt-4">
+                <h4 class="recenttrans">Last Five Recent Transactions</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                                <th>Date</th>
+                                <th>Transaction ID</th>
+                                <th>UserAccount</th>
+                                <th>RecverAccount</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Balance (₹)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% int i=1;
+                    while(ait.hasNext() && i<=5){
+                          Transaction T=ait.next();
+                    %>
+                            <tr>
+                                <td><%=T.getDate() %></td>
+                                <td><%=T.getTransactionId() %></td>
+                                <td><%=T.getUser() %></td>
+                                <td><%=T.getRec_acc() %></td>
+                                <td><%=T.getAmount() %></td>
+                                <td><span class="badge bg-success"><%=T.getTransaction() %></span></td>
+                                <td><%=T.getBalance() %></td>
+                            </tr>
+                     <% i++;
+                        } 
+                     %>       
+                    </tbody>
+                </table>
+                <a href="Profile.jsp"><button class="btn btn-profile">View All</button></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        © 2024 BankName. All rights reserved.
+    </footer>
+
+    <!-- Bootstrap Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+    <%} else{%>
+        <!-- Sidebar -->
     <div class="sidebar">
         <h4 class="text-white mb-4">Bank Dashboard</h4>
         <nav class="nav flex-column">
@@ -236,10 +374,10 @@
                         <tr>
                                 <th>Date</th>
                                 <th>Transaction ID</th>
-                                <th>UserAccount</th>
                                 <th>RecverAccount</th>
                                 <th>Amount</th>
                                 <th>Status</th>
+                                <th>Balance (₹)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -250,10 +388,10 @@
                             <tr>
                                 <td><%=T.getDate() %></td>
                                 <td><%=T.getTransactionId() %></td>
-                                <td><%=T.getUser() %></td>
                                 <td><%=T.getRec_acc() %></td>
                                 <td><%=T.getAmount() %></td>
                                 <td><span class="badge bg-success"><%=T.getTransaction() %></span></td>
+                                <td><%=T.getBalance() %></td>
                             </tr>
                      <% i++;
                         } 
@@ -272,6 +410,8 @@
 
     <!-- Bootstrap Icons -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+    
+    <%} %>
 </body>
 
 </html>

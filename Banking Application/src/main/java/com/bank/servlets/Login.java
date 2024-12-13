@@ -35,32 +35,27 @@ public class Login extends HttpServlet {
 		//jdbc implementation
 		CustomerDAO cdao=new CustomerDAOImpl();
 		Customer c=cdao.getCustomer(AccNumber, Pin);
+				
 		
-		session.setAttribute("customer", c);
-	
-		
-		
-		//TRANSACTION ATTRIBUTE SETTING 
-		Transaction ts = new Transaction();
-		ts.setUser(c.getAccNum());
-		session.setAttribute("tran", ts);
-
-		
+		// store customer object to session and innitilize transaction new object simultaneoulsy store in session TRANSACTION ATTRIBUTE SETTING 
 		
 		  if(c!=null) 
-		  { 			  
+		  {   
+			  Transaction ts = new Transaction();
+			  ts.setUser(c.getAccNum());
+			  session.setAttribute("tran", ts);
 			  session.setAttribute("customer", c);
 			  RequestDispatcher rd=req.getRequestDispatcher("Dashboard.jsp");
 			  rd.forward(req, resp);
 		  } 
-		  else 
+		  else
 		  {		  
 			  req.setAttribute("failure", "Failed to Login");
 			  RequestDispatcher rd=req.getRequestDispatcher("Login.jsp");
 			  rd.forward(req, resp);
 		  }
-		
+
 	
 	}
-
+	
 }
