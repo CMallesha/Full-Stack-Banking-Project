@@ -95,6 +95,28 @@
     input[type="submit"]:hover {
         background-color: #cc0000;
     }
+            /* Footer */
+    footer {
+        background-color: #242426; /* Dark blue background */
+        color: white; /* White text */
+        text-align: center; /* Center align the text */
+        padding: 15px 0; /* Top and bottom padding */
+        font-size: 14px; /* Font size */
+        position: fixed; /* Make the footer stick to the bottom */
+        left: 0;
+        width: 100%;
+        bottom: 0;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Shadow for better visual effect */
+    }
+
+    footer a {
+        color: #ffd700; /* Gold color for links */
+        text-decoration: none;
+    }
+
+    footer a:hover {
+        text-decoration: underline; /* Underline on hover */
+    }
 </style>
 </head>
 <body>
@@ -142,4 +164,7 @@
     </table>
 </div>
 </body>
+    <footer>
+    © 2024 MSpace Bank. All rights reserved.
+   </footer>
 </html>

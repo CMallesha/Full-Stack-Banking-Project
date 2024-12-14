@@ -25,6 +25,55 @@
         .card {
             margin-top: 20px;
         }
+
+        .back-btn {
+            padding: 15px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(45deg, #ff6f61, #ff3d29);
+            border-radius: 12px;
+            text-decoration: none;
+            margin-top: 20px;
+            display: block;
+            width: fit-content;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(45deg, #ff3d29, #ff6f61);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-btn:active {
+            transform: translateY(1px);
+        }
+                /* Footer */
+    footer {
+        background-color: #242426; /* Dark blue background */
+        color: white; /* White text */
+        text-align: center; /* Center align the text */
+        padding: 15px 0; /* Top and bottom padding */
+        font-size: 14px; /* Font size */
+        position: fixed; /* Make the footer stick to the bottom */
+        left: 0;
+        width: 100%;
+        bottom: 0;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Shadow for better visual effect */
+    }
+
+    footer a {
+        color: #ffd700; /* Gold color for links */
+        text-decoration: none;
+    }
+
+    footer a:hover {
+        text-decoration: underline; /* Underline on hover */
+    }
     </style>
 </head>
 <body>
@@ -98,8 +147,14 @@
                 </div>
             </div>
         </div>
+
+        <!-- Back to Dashboard Button (Placed below the table) -->
+        <a href="Dashboard.jsp" class="back-btn">Back to Dashboard</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+    <footer>
+    © 2024 MSpace Bank. All rights reserved.
+   </footer>
 </html>

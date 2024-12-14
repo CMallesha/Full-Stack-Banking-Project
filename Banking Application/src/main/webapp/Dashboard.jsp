@@ -128,31 +128,27 @@
         }
 
         /* Footer */
-       footer {
-           margin-top: auto;
-           padding: 20px;
-           background-color: #ffffff;
-           border-top: 1px solid #ddd;
-           text-align: center;
-           font-size: 14px;
-           color: #666;
-      }
-      .fail{
-            text-align: center;
-            color: red;
-            font-weight: bold;
-      }
-      .recenttrans {
-            color: white;
-            font-weight: bold;
-            background-color: #28a745; /* Green background */
-            padding: 10px 20px; /* Adds space around the text */
-            border-radius: 8px; /* Rounded corners */
-            text-align: center; /* Centers the text */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
-            font-size: 1.5rem; /* Increases the font size */
-            letter-spacing: 1px; /* Adds spacing between letters */
-       }
+    footer {
+        background-color: #242426; /* Dark blue background */
+        color: white; /* White text */
+        text-align: center; /* Center align the text */
+        padding: 15px 0; /* Top and bottom padding */
+        font-size: 14px; /* Font size */
+        position: fixed; /* Make the footer stick to the bottom */
+        left: 0;
+        width: 100%;
+        bottom: 0;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Shadow for better visual effect */
+    }
+
+    footer a {
+        color: #ffd700; /* Gold color for links */
+        text-decoration: none;
+    }
+
+    footer a:hover {
+        text-decoration: underline; /* Underline on hover */
+    }
     </style>
 </head>
 
@@ -405,7 +401,7 @@
 
     <!-- Footer -->
     <footer>
-        © 2024 BankName. All rights reserved.
+        © 2024 MSpace Bank. All rights reserved.
     </footer>
 
     <!-- Bootstrap Icons -->
