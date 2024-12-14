@@ -117,14 +117,40 @@
     footer a:hover {
         text-decoration: underline; /* Underline on hover */
     }
+    .sucs{
+            text-align: center;
+            color: green;
+            font-weight: bold;
+      }
+     .fail{
+            text-align: center;
+            color: red;
+            font-weight: bold;
+        }
 </style>
 </head>
 <body>
 <div class="container">
     <h1>Admin Dashboard</h1>
+    
+<% String Suc = (String) request.getAttribute("userdeleted"); %>
+<% if (Suc != null) { %>
+    <h2 class="sucs"><%= Suc %></h2>
+<% } %>
+
+<% String Fail = (String) request.getAttribute("failedtodelet"); %>
+<% if (Fail != null) { %>
+    <h2 class="fail"><%= Fail %></h2>
+<% } %>
+
+<% String Failed = (String) request.getAttribute("failedtodeletadmin"); %>
+<% if (Failed != null) { %>
+    <h2 class="fail"><%= Failed %></h2>
+<% } %>
+
+         
     <p class="description">Welcome to the Bank Application Admin Panel.</p>
     <p class="description">Here, you can view all registered users and manage them by deleting accounts when necessary.</p>
-    
     <table>
         <thead>
             <tr>
@@ -154,7 +180,7 @@
                 <td><%= s.getBal() %></td>
                 <td>
                     <form action="delete" method="post">
-                        <input type="hidden" name="id" value="<%= s.getAccNum() %>">
+                        <input type="hidden" name="accoutnumber" value="<%= s.getAccNum() %>">
                         <input type="submit" value="Delete">
                     </form>
                 </td>
