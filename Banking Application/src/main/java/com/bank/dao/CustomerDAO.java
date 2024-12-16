@@ -10,6 +10,7 @@ public interface CustomerDAO {
 	public Customer getCustomer(long AccNum,int Pin);
 	public Customer getCustomer(long Phone,String mail);
 	public Customer getCustomer(long AccNum);
+	public Customer getCustomerbyphone(long phone);
 	public List getCustomer();
 	public boolean updateCustomer(Customer c);
 	public boolean deleteCustomer(Customer c);

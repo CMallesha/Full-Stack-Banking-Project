@@ -181,6 +181,7 @@
                 <td>
                     <form action="delete" method="post">
                         <input type="hidden" name="accoutnumber" value="<%= s.getAccNum() %>">
+                        <input type="hidden" name="amt" value="<%= s.getBal() %>">
                         <input type="submit" value="Delete">
                     </form>
                 </td>

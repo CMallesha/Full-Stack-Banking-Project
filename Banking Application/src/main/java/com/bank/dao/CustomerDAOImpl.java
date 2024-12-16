@@ -165,6 +165,34 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 	
 	
+	@Override
+	public Customer getCustomerbyphone(long phone) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps=null;
+		 ResultSet rs=null;
+		 Customer c=null;
+		 String query="SELECT * FROM CUSTOMER WHERE PHONE=? ";
+		 try {
+		 ps=con.prepareStatement(query);
+		 ps.setLong(1,phone);
+		 rs=ps.executeQuery();
+		 if(rs.next())
+		 {
+		 c=new Customer();
+		 c.setAccNum(rs.getInt(1));
+		 c.setName(rs.getString(2));
+		 c.setPhone(rs.getLong(3));
+		 c.setMail(rs.getString(4));
+		 c.setBal(rs.getDouble(5));
+		 c.setPin(rs.getInt(6));
+		 }
+		 } catch (SQLException e) {
+		 // TODO Auto-generated catch block
+		 e.printStackTrace();
+		 }
+		 return c;
+	}
+	
 
 	
 

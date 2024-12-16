@@ -149,12 +149,13 @@
           if(Success!=null){%>
           <h3 class="sucs"><%=Success %></h3>
           <%}%>
-    
+              
          <%String Failure=(String)request.getAttribute("failure");
          if(Failure!=null){%>
          <h3 class="fail"><%=Failure %></h3>
          <%}%>
             
+          
             <form action="SignUp" method="post">
                 <input type="text" class="form-control" placeholder="Enter your name" name="name" required>
                 <input type="tel" class="form-control" placeholder="Enter your phone number" name="phone" required>
