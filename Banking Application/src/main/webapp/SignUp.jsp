@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +35,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            /* This centers content horizontally */
         }
 
         .left-section img {
@@ -54,7 +52,6 @@
             color: #ccc;
             line-height: 1.5;
         }
-
 
         .right-section {
             padding: 40px;
@@ -95,39 +92,52 @@
         .login-link a:hover {
             text-decoration: underline;
         }
-        .sucs{
+        
+        .sucs {
             text-align: center;
             color: green;
             font-weight: bold;
-            
         }
-        .fail{
+        
+        .fail {
             text-align: center;
             color: red;
             font-weight: bold;
         }
-                /* Footer */
-    footer {
-        background-color: #242426; /* Dark blue background */
-        color: white; /* White text */
-        text-align: center; /* Center align the text */
-        padding: 15px 0; /* Top and bottom padding */
-        font-size: 14px; /* Font size */
-        position: fixed; /* Make the footer stick to the bottom */
-        left: 0;
-        width: 100%;
-        bottom: 0;
-        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Shadow for better visual effect */
-    }
+        
+        .acc-number {
+            text-align: center;
+            font-size: 10px;
+            font-weight: bold;
+            color: #1e2957;
+            background: #f1f1f1;
+            padding: 7px;
+            border-radius: 7px;
+            margin-top: 7px;
+        }
 
-    footer a {
-        color: #ffd700; /* Gold color for links */
-        text-decoration: none;
-    }
+        /* Footer */
+        footer {
+            background-color: #242426;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+            position: fixed;
+            left: 0;
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-    footer a:hover {
-        text-decoration: underline; /* Underline on hover */
-    }
+        footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -140,22 +150,25 @@
             <p>Your money is safe with us! Don’t worry, it should take only a couple of minutes to get started.</p>
         </div>
 
-
         <!-- Right Section -->
         <div class="right-section">
             <h4 class="mb-4 text-center">Create an Account</h4>
 
-          <%String Success=(String)request.getAttribute("success");
-          if(Success!=null){%>
-          <h3 class="sucs"><%=Success %></h3>
-          <%}%>
-              
-         <%String Failure=(String)request.getAttribute("failure");
-         if(Failure!=null){%>
-         <h3 class="fail"><%=Failure %></h3>
-         <%}%>
+            <% String Success = (String) request.getAttribute("success");
+               if (Success != null) { %>
+               <h3 class="sucs"><%= Success %></h3>
+            <% } %>
+
+            <% String Failure = (String) request.getAttribute("failure");
+               if (Failure != null) { %>
+               <h3 class="fail"><%= Failure %></h3>
+            <% } %>
+
+            <% Long AccNum = (Long) request.getAttribute("accountNumber"); 
+               if (AccNum != null && AccNum > 0) { %>
+               <div class="acc-number">Your Account Number: <%= AccNum %></div>
+            <% } %>
             
-          
             <form action="SignUp" method="post">
                 <input type="text" class="form-control" placeholder="Enter your name" name="name" required>
                 <input type="tel" class="form-control" placeholder="Enter your phone number" name="phone" required>
@@ -170,7 +183,7 @@
         </div>
     </div>
 </body>
-    <footer>
+<footer>
     © 2024 MSpace Bank. All rights reserved.
-   </footer>
+</footer>
 </html>

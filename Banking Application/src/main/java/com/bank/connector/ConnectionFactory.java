@@ -11,7 +11,7 @@ public class ConnectionFactory {
 		Connection con=null;
 		 String url="jdbc:mysql://localhost:3306/bank";
 		 String user="root";
-		 String password="Mallu@4564";
+		 String password="tiger";
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
